@@ -1,1 +1,19 @@
-<h1>Hello to your e-service plateform</h1>
+<!-- nav -->
+<!--<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user">
+  <div class="navbar-nav">
+    <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+    <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active">Users</a>
+    <a class="nav-item nav-link" (click)="logout()">Logout</a>
+  </div>
+</nav>-->
+<!-- main app container -->
+<div class="app-container" [ngClass]="{ 'bg-light': user }">
+  <router-outlet></router-outlet>
+</div>
+
+<!-- credits -->
+<!--<div class="text-center mt-4">
+  <p>
+    <a href="#" target="_top">e-service-platform.com</a>
+  </p>
+</div>-->

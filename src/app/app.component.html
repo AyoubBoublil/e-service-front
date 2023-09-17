@@ -1,15 +1,50 @@
 <!-- nav -->
-<!--<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user">
-  <div class="navbar-nav">
-    <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-    <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active">Users</a>
-    <a class="nav-item nav-link" (click)="logout()">Logout</a>
+<div class="d-flex" id="wrapper">
+  <!-- Sidebar -->
+  <div class="bg-light border-right" id="sidebar-wrapper" [ngClass]="status ? 'hide' : 'show'" *ngIf="user">
+    <div class="sidebar-heading">E-Service platform</div>
+    <div class="list-group list-group-flush">
+      <span [routerLink]="['/dashboard']" class="list-group-item list-group-item-action bg-light">Dashboard</span>
+      <span [routerLink]="['/level']" class="list-group-item list-group-item-action bg-light">Level</span>
+      <span [routerLink]="['/subject']" class="list-group-item list-group-item-action bg-light">Subject</span>
+      <span [routerLink]="['/manage-users']" class="list-group-item list-group-item-action bg-light">Users</span>
+      <span [routerLink]="['/profile']" class="list-group-item list-group-item-action bg-light">Profile</span>
+    </div>
   </div>
-</nav>-->
-<!-- main app container -->
-<div class="app-container" [ngClass]="{ 'bg-light': user }">
-  <router-outlet></router-outlet>
+  <!-- /#sidebar-wrapper -->
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="user">
+      <div class="container-fluid">
+        <button class="btn btn-primary" (click)="clickEvent()"><i class="bi bi-list h3"></i></button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          </ul>
+          <ul class="d-flex">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <span class="nav-link" style="color: black">
+                Bonjour, {{user.lastName + ' ' + user.firstName}}
+              </span>
+              <li class="nav-item">
+                <a class="nav-link" (click)="logout()">Logout</a>
+              </li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- main app container -->
+    <div class="app-container" [ngClass]="{ 'bg-white': user }">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <!-- /#page-content-wrapper -->
 </div>
+<!-- /#wrapper -->
 
 <!-- credits -->
 <!--<div class="text-center mt-4">

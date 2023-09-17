@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from "../../shared/services/auth.service";
 import {first} from "rxjs";
+import {AlertService} from "../../shared/services";
 
 @Component({
   selector: 'app-login',
@@ -13,10 +14,10 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   loading: boolean = false;
   submitted: boolean = false;
-  returnUrl: string;
+  returnUrl: string = 'dashboard';
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router,
-              private authService: AuthService) {
+              private authService: AuthService, private alertService: AlertService) {
   }
 
   ngOnInit() {
@@ -41,9 +42,9 @@ export class LoginComponent implements OnInit {
     // this.alertService.clear();
 
     // stop here if form is invalid
-    if (this.form.invalid) {
+    /*if (this.form.invalid) {
       return;
-    }
+    }*/
 
     this.loading = true;
     // calling the service back end pour login
@@ -56,7 +57,8 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         (error) => {
-          // this.alertService.error(error);
+          console.log('error  ', error);
+          this.alertService.error(error.error.message);
           this.loading = false;
         }
       );

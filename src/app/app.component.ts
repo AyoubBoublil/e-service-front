@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import {User} from "./models/user";
-import {AuthService} from "./services";
+import {User} from "./shared/models/user";
+import {AuthService} from "./shared/services";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -10,10 +11,21 @@ import {AuthService} from "./services";
 export class AppComponent {
   title = 'e-service-front';
   user: User;
+  status: boolean = false;
 
-  constructor(private authService: AuthService) {
+  clickEvent(){
+    this.status = !this.status;
+  }
+
+  constructor(private authService: AuthService, private router: Router) {
     this.authService.user.subscribe(x => this.user = x);
   }
 
+  logout() {
+    this.authService.logout();
+  }
 
+  navigateTo(url: string) {
+    this.router.navigate([url]);
+  }
 }
